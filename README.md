@@ -12,13 +12,9 @@ Bringing up the Docker Compose network with `site` instead of just using `up`, e
 - **mysql** - `:3306`
 - **postgres** - `:5432`
 - **php** - `:9000`
-- **mailhog** - `:8025` 
 
-Three additional containers are included that handle Composer, NPM, and Artisan commands *without* having to have these platforms installed on your local computer. Use the following command examples from your project root, modifying them to fit your particular use case.
 
-- `docker-compose run --rm composer update`
-- `docker-compose run --rm npm run dev`
-- `docker-compose run --rm artisan migrate` 
+
 
 
 
@@ -37,16 +33,22 @@ docker exec -it <redis container ID> redis-cli
 ## PSQL Access & Export Import
 
 docker exec -it <postgres container ID> bash
+
 root@containerID:/# psql -U postgres
 
-docker exec -i pg_container_name pg_dump --username pg_username --password pg_password database_name > /desired/path/on/your/machine/dump.sql
+`docker exec -i pg_container_name pg_dump --username pg_username --password pg_password database_name > /desired/path/on/your/machine/dump.sql`
 
-docker exec -i pg_container_name psql --username pg_username --password pg_password database_name < /path/on/your/machine/dump.sql
+`docker exec -i pg_container_name psql --username pg_username --password pg_password database_name < /path/on/your/machine/dump.sql`
 
 
-docker volume create pgdata
-docker volume inspect pgdata
-docker network create DockerNet
-docker network connect DockerNet postgres
-docker network connect DockerNet php
-docker network inspect DockerNet
+`docker volume create pgdata`
+
+`docker volume inspect pgdata`
+
+`docker network create DockerNet`
+
+`docker network connect DockerNet postgres`
+
+`docker network connect DockerNet php`
+
+`docker network inspect DockerNet`
